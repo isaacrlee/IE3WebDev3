@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Webpage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        .bg-yellow {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lisa's Menu</h1>
+    <h3>Cart: $ <span id="cart-value">0</span> </h3> <!--Element that holds value of cart-->
+    <a id="reset" href="#">Reset Cart</a>
+    <ul id="cart-items">
+    </ul>
+    <h3>Meal Value: $ <span id="meal-val">N/A</span></h3>
+    <ul id="meal">
+        <li><a href="#" id="b">Breakfast ($5)</a></li> <!--Each element represents a value for an equivalency meal-->
+        <li><a href="#" id="l">Lunch ($7)</a></li>
+        <li><a href="#" id="d">Dinner ($9)</a></li>
+    </ul>
+    <h3>Menu</h3>
+    <ul id="menu">
+        {% for id in menu %}
+        <li><a id="{{ id }}" href="#">{{ menu[id]['Name'] }}: ${{menu[id]['Price']}}</a></li> <!--Each list element is an item on the menu-->
+        {% endfor %}
+    </ul>
+
+    <script type="text/javascript">
+        var menu = {{ menu | safe }}; //get menu in json form from python file
+        $(function () {
+            var total = 0; //variable holding value of items in cart
+            $('#meal a').click(function () {
+                var meal;
+                $('#meal a').removeClass('bg-yellow');
+                $(this).addClass('bg-yellow');
+                id = $(this).attr('id'); //get id of meal that has been clicked
+                if (id == "b") meal = 5.00;
+                else if (id == "l") meal = 7.00;
+                else if (id == "d") meal = 9.00;
+                $('#meal-val').text(meal); //update meal value text
+            });
+            $('#menu a').click(function () { //handler for when a menu item is clicked (added to cart)
+                id = parseInt($(this).attr('id')); //get id of item that has been clicked (to allow price lookup)
+                var val = menu[id]['Price']; //get price of item from id and menu
+                total += val; //add price to cart total
+                total = Math.round(total * 100) / 100; //rounds total to 2 decimal places
+                $('#cart-value').text(total.toFixed(2)); //update cart text toFixed makes 2 decimal places always shown
+                text = '<li>' + menu[id]['Name'] + ": " + val.toFixed(2) /*+ '<a href=\'#\' id=\'remove\'> REMOVE</a>'*/ + '</li>';
+                $('#cart-items').append(text);
+            });
+            $('#reset').click(function () { // handler for when reset is clicked (cart is cleared)
+                total = 0; //reset cart total to 0
+                $('#cart-items').empty(); //empties cart
+                $('#cart-value').text(total); //update cart text
+            });
+            // $('a#remove').click(function () {
+            //     console.log("remove attempted");
+            //     $(this).parent().remove();
+            // });
+        });
+
+    </script>
+</body>
+
+</html>
