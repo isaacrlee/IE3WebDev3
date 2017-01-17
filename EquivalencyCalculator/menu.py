@@ -47,12 +47,3 @@ menu = {
   "45": { "Name":"Beef Jerky", "Price":6.99},
   "46": { "Name":"Sandwich Combo", "Price":7.58}
 }
-
-if type(next (iter (menu.values()))):
-    pp = pprint.PrettyPrinter(indent=4)
-    new_menu = {}
-    for key in menu.keys():
-        new_key = int(key)
-        new_menu[new_key] = menu[key]
-    pp.pprint(new_menu)
-    menu = new_menu
