@@ -1,4 +1,3 @@
-import pprint
 menu = {
   "1": { "Name":"Half-Dozen Eggs", "Price":1.09},
   "2": { "Name":"Yoplait Yogurt", "Price":1.19},
