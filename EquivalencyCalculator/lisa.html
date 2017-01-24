@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Webpage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="menu.js"></script>
+    <style>
+        .bg-yellow {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lisa's Menu</h1>
+    <h3>Cart: $ <span id="cart-value">0</span> </h3> <!--Element that holds value of cart-->
+    <a id="reset" href="#">Reset Cart</a>
+    <ul id="cart-items">
+    </ul>
+    <h3>Meal Value: $ <span id="meal-val">N/A</span></h3>
+    <ul id="meal">
+        <li><a href="#" id="b">Breakfast ($5)</a></li> <!--Each element represents a value for an equivalency meal-->
+        <li><a href="#" id="l">Lunch ($7)</a></li>
+        <li><a href="#" id="d">Dinner ($9)</a></li>
+    </ul>
+    <h3>Menu</h3>
+    <ul id="menu">
+    </ul>
+    <script src="app.js"></script>
+</body>
+
+</html>
