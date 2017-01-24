@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Webpage</title>
+</head>
+
+<body>
+
+    <div id="day">test</div>
+    <div id="breakfast"></div>
+    <div id="lunch"></div>
+    <div id="dinner"></div>
+    <script>
+        var d = new Date();
+        var rawDay = d.getUTCDay();
+        var stringDay = rawDay.toString();
+
+        var days = {
+            "0": "Sunday",
+            "1": "Monday",
+            "2": "Tuesday",
+            "3": "Wednesday",
+            "4": "Thursday",
+            "5": "Friday",
+            "6": "Saturday"
+        };
+        console.log(days[stringDay]);
+        document.getElementById("day").innerHTML = days[stringDay];
+
+    </script>
+</body>
+
+</html>
