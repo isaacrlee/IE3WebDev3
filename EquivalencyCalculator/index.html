@@ -7,15 +7,18 @@
 
 <body>
 
-    <div id="day">test</div>
+    <div id="day"></div>
+    <div id="equivprice"></div>
     <div id="breakfast"></div>
     <div id="lunch"></div>
     <div id="dinner"></div>
+    <div id="test"></div>
+
     <script>
         var d = new Date();
+
         var rawDay = d.getUTCDay();
         var stringDay = rawDay.toString();
-
         var days = {
             "0": "Sunday",
             "1": "Monday",
@@ -25,8 +28,39 @@
             "5": "Friday",
             "6": "Saturday"
         };
-        console.log(days[stringDay]);
+
+        var rawHour = d.getHours();
+        var rawMinutes = d.getMinutes();
+        var alteredTime = (rawHour * 100) + rawMinutes;
+        
+        // breakfast 7:30 10:45 $5
+        // lunch 10:46 - 4:45 pm $7
+        // dinner 4:46 - 7:30 pm $9
+        // late night 7:31 - 2:00am $7
+
+        var equivalencyTime = "";
+        if(alteredTime >= 300 && alteredTime < 730){
+            equivalencyTime = "Closed";
+        }
+        else if (alteredTime >= 730 && alteredTime <= 1045){
+            equivalencyTime = "Breakfast";
+        }
+        else if (alteredTime >= 1646 && alteredTime <= 1930){
+            equivalencyTime = "Dinner";
+        }
+        else{
+            equivalencyTime = "Lunch";
+        }
+
+        var equivalencyPrices = {
+            "Closed": "Closed",
+            "Breakfast": "$5.00",
+            "Lunch": "$7.00",
+            "Dinner": "$9.00"
+        }
+
         document.getElementById("day").innerHTML = days[stringDay];
+        document.getElementById("equivprice").innerHTML = equivalencyPrices[equivalencyTime];
 
     </script>
 </body>
