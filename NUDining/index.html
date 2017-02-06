@@ -32,23 +32,23 @@
         var rawHour = d.getHours();
         var rawMinutes = d.getMinutes();
         var alteredTime = (rawHour * 100) + rawMinutes;
-        
+
         // breakfast 7:30 10:45 $5
         // lunch 10:46 - 4:45 pm $7
         // dinner 4:46 - 7:30 pm $9
         // late night 7:31 - 2:00am $7
 
         var equivalencyTime = "";
-        if(alteredTime >= 300 && alteredTime < 730){
+        if (alteredTime >= 300 && alteredTime < 730) {
             equivalencyTime = "Closed";
         }
-        else if (alteredTime >= 730 && alteredTime <= 1045){
+        else if (alteredTime >= 730 && alteredTime <= 1045) {
             equivalencyTime = "Breakfast";
         }
-        else if (alteredTime >= 1646 && alteredTime <= 1930){
+        else if (alteredTime >= 1646 && alteredTime <= 1930) {
             equivalencyTime = "Dinner";
         }
-        else{
+        else {
             equivalencyTime = "Lunch";
         }
 
@@ -61,7 +61,6 @@
 
         document.getElementById("day").innerHTML = days[stringDay];
         document.getElementById("equivprice").innerHTML = equivalencyPrices[equivalencyTime];
-
     </script>
 </body>
 
