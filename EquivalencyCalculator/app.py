@@ -8,13 +8,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    """ function for a get request """
     hours = get_hours()
     return render_template('index.html', hours=hours)
-    # return render_template('index.html')
 
 
 @app.route('/', methods=['POST'])
 def index_post():
+    """ function for a post request """
     netid = request.form['netid']
     password = request.form['password']
     balance = get_balance(netid, password)
@@ -22,6 +23,7 @@ def index_post():
 
 
 def get_balance(netid, password):
+    """ gets a user's meal balance from the Northwestern Dining website """
     text = get_html_auth(
         'https://go.dosa.northwestern.edu/uhfs/foodservice/balancecheck', netid, password)
     soup = BeautifulSoup(text, 'html.parser')
@@ -30,6 +32,7 @@ def get_balance(netid, password):
 
 
 def get_hours():
+    """ gets hours from the Northwestern Dining website """
     text = get_html(
         'https://northwestern.sodexomyway.com/dining-choices/opennow.html')
     soup = BeautifulSoup(text, 'html.parser')
@@ -38,10 +41,12 @@ def get_hours():
 
 
 def get_html(site_url):
-    r = requests.get(site_url)
-    return r.text.encode(r.encoding)
+    """ get request """
+    req = requests.get(site_url)
+    return req.text.encode(req.encoding)
 
 
 def get_html_auth(site_url, username, password):
-    r = requests.get(site_url, auth=(username, password))
-    return r.text.encode(r.encoding)
+    """ get request with authentification """
+    req = requests.get(site_url, auth=(username, password))
+    return req.text.encode(req.encoding)
